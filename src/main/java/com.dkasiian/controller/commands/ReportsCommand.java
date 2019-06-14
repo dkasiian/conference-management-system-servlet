@@ -3,7 +3,6 @@ package com.dkasiian.controller.commands;
 import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.controller.utils.SecurityConfigUtil;
 import com.dkasiian.model.entities.Report;
-import com.dkasiian.model.entities.Role;
 import com.dkasiian.model.entities.User;
 import com.dkasiian.model.services.ReportService;
 import com.dkasiian.model.services.UserService;
@@ -40,7 +39,7 @@ public class ReportsCommand extends Command {
         String login = (String) request.getSession().getAttribute("login");
         Locale locale = (Locale) request.getSession().getAttribute("locale");
 
-        int reportCount = reportService.getReportsAmountLinkedToConference(conferenceId);
+        int reportCount = reportService.getReportsCountLinkedToConference(conferenceId);
         Map<String, Integer> paginationAttributes =
                 new PaginationUtil().getAttributes(request, reportCount);
         request.setAttribute("paginationAttributes", paginationAttributes);

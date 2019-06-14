@@ -18,9 +18,9 @@ public interface ReportDao extends GenericDao<Report>{
 
     Map<Long, List<Report>> getSpeakersReports(List<Long> speakersIds, String language);
 
-    int getReportsAmount();
+    int getReportsCount();
 
-    int getReportsAmountLinkedToConference(long conferenceId);
+    int getReportsCountLinkedToConference(long conferenceId);
 
     List<Report> getPaginatedReportsLinkedToConference(long conferenceId,
                                                        Integer begin,

@@ -33,10 +33,10 @@ public class ReportService {
         return reportDao.getSpeakersReports(speakersIds, language);
     }
 
-    public int getReportsAmount() { return reportDao.getReportsAmount(); }
+    public int getReportsAmount() { return reportDao.getReportsCount(); }
 
-    public int getReportsAmountLinkedToConference(long conferenceId) {
-        return reportDao.getReportsAmountLinkedToConference(conferenceId);
+    public int getReportsCountLinkedToConference(long conferenceId) {
+        return reportDao.getReportsCountLinkedToConference(conferenceId);
     }
 
     public List<Report> getAllReportsLinkedToConference(long conferenceId, String language) {

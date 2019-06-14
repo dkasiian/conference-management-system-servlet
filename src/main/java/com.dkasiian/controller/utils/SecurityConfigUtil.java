@@ -61,8 +61,9 @@ public class SecurityConfigUtil {
         userCommands.add("future-conferences");
         userCommands.add("set-language");
         userCommands.add("reports");
-        userCommands.add("register");
-        userCommands.add("unregister");
+//        userCommands.add("register");
+//        userCommands.add("unregister");
+        userCommands.add("register-unregister");
         userCommands.add("rating");
         userCommands.add("set-rating");
         return userCommands;

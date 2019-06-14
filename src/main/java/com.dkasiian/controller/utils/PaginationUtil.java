@@ -9,6 +9,8 @@ public class PaginationUtil {
     private String getParameter(HttpServletRequest request, String parameter, String defaultParameter) {
         if (request.getParameter(parameter) != null)
             return request.getParameter(parameter);
+//        else if (request.getAttribute(parameter) != null)
+//            return (String) request.getAttribute(parameter);
         else
             return defaultParameter;
     }

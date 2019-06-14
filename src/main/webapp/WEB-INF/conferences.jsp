@@ -61,9 +61,13 @@
                     <td>
                         <c:choose>
                             <c:when test="${requestScope.isRegister[status.index]}">
-                                <form action="${pageContext.request.contextPath}/${sessionScope.role}/unregister"
+                                <form action="${pageContext.request.contextPath}/${sessionScope.role}/register-unregister"
                                       method="post">
                                     <input type="hidden" name="conferenceId" value="${conference.id}">
+                                    <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
+                                    <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
+                                    <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
+                                    <input type="hidden" name="command" value="unregister">
                                     <button type="submit" class="btn btn-warning"
                                             <c:if test="${conference.dateTime < now}">disabled</c:if>>
                                         Unregister
@@ -71,9 +75,13 @@
                                 </form>
                             </c:when>
                             <c:otherwise>
-                                <form action="${pageContext.request.contextPath}/${sessionScope.role}/register"
+                                <form action="${pageContext.request.contextPath}/${sessionScope.role}/register-unregister"
                                       method="post">
                                     <input type="hidden" name="conferenceId" value="${conference.id}">
+                                    <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
+                                    <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
+                                    <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
+                                    <input type="hidden" name="command" value="register">
                                     <button type="submit" class="btn btn-primary"
                                             <c:if test="${conference.dateTime < now}">disabled</c:if>>
                                         Register

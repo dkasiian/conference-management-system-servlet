@@ -179,7 +179,7 @@ public class JdbcReportDao implements ReportDao {
     }
 
     @Override
-    public int getReportsAmount() {
+    public int getReportsCount() {
         int reportsAmount = 0;
         try (Connection connection = dataSource.getConnection();
              PreparedStatement conferenceStatement =
@@ -189,13 +189,13 @@ public class JdbcReportDao implements ReportDao {
                 reportsAmount = resultSet.getInt(1);
             return reportsAmount;
         } catch (SQLException exc) {
-            LOG.error("JdbcReportDao :: getReportsAmount :: " + exc);
+            LOG.error("JdbcReportDao :: getReportsCount :: " + exc);
             throw new RuntimeException();
         }
     }
 
     @Override
-    public int getReportsAmountLinkedToConference(long conferenceId) {
+    public int getReportsCountLinkedToConference(long conferenceId) {
         int reportAmount = 0;
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection
@@ -206,7 +206,7 @@ public class JdbcReportDao implements ReportDao {
                 reportAmount = resultSet.getInt(1);
             return reportAmount;
         } catch (SQLException exc) {
-            LOG.error("JdbcReportDao :: getReportsAmountLinkedToConference :: " + exc);
+            LOG.error("JdbcReportDao :: getReportsCountLinkedToConference :: " + exc);
             throw new RuntimeException();
         }
     }
