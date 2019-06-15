@@ -4,6 +4,7 @@ import com.dkasiian.model.ResourceName;
 import com.dkasiian.model.dao.UserDao;
 import com.dkasiian.model.dao.mappers.UserMapper;
 import com.dkasiian.model.dto.UserDto;
+import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.entities.Role;
 import com.dkasiian.model.entities.User;
 import org.apache.logging.log4j.LogManager;
@@ -314,6 +315,24 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.executeQuery();
         } catch (SQLException exc) {
             LOG.error("JdbcUserDao :: updateRating :: " + exc);
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public List<User> getPaginatedSpeakers(Integer begin, Integer recordsPerPage, String language) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     sqlStatementsBundle.getString("users.select.speakers.with.pagination"))) {
+            List<User> speakers = new ArrayList<>();
+            preparedStatement.setInt(1, begin);
+            preparedStatement.setInt(2, recordsPerPage);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+                speakers.add(userMapper.mapToObject(resultSet, language));
+            return speakers;
+        } catch (SQLException exc) {
+            LOG.error("JdbcUserDao :: getPaginatedSpeakers :: " + exc);
             throw new RuntimeException();
         }
     }

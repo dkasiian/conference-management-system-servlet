@@ -1,10 +1,14 @@
 package com.dkasiian.controller.commands;
 
+import com.dkasiian.controller.utils.PaginationUtil;
+import com.dkasiian.model.entities.User;
 import com.dkasiian.model.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class SetRatingCommand extends Command {
 
@@ -15,6 +19,14 @@ public class SetRatingCommand extends Command {
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
         String login = (String) request.getSession().getAttribute("login");
+
+        int speakersCount = userService.getSpeakersIds().size();
+        Map<String, Integer> paginationAttributes = new PaginationUtil().getAttributes(request, speakersCount);
+        request.getSession().setAttribute("paginationAttributes", paginationAttributes);
+        List<User> speakers = userService.getPaginatedSpeakers(
+                paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
+        request.getSession().setAttribute("paginationAttributes", paginationAttributes);
+        request.getSession().setAttribute("speakers", speakers);
 
         long userId = userService.getUserId(login, locale.toString());
         long speakerId = Long.valueOf(request.getParameter("speakerId"));

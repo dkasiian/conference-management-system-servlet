@@ -42,4 +42,6 @@ public interface UserDao extends GenericDao<User> {
     boolean checkIsUserAlreadySetRating(long userId, long speakerId);
 
     void updateRating(long userId, long speakerId, int rating);
+
+    List<User> getPaginatedSpeakers(Integer begin, Integer recordsPerPage, String language);
 }

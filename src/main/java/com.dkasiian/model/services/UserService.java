@@ -91,4 +91,8 @@ public class UserService {
     public void updateRating(long userId, long speakerId, int rating) {
         userDao.updateRating(userId, speakerId, rating);
     }
+
+    public List<User> getPaginatedSpeakers(Integer begin, Integer recordsPerPage, String language) {
+        return userDao.getPaginatedSpeakers(begin, recordsPerPage, language);
+    }
 }

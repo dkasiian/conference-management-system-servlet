@@ -1,6 +1,8 @@
 package com.dkasiian.controller.commands;
 
+import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.model.ResourceName;
+import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.entities.Report;
 import com.dkasiian.model.entities.User;
 import com.dkasiian.model.services.ReportService;
@@ -9,6 +11,8 @@ import com.dkasiian.model.services.UserService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RatingCommand extends Command {
 
@@ -22,6 +26,20 @@ public class RatingCommand extends Command {
         String login = (String) request.getSession().getAttribute("login");
         ResourceBundle messages = ResourceBundle.getBundle(ResourceName.MESSAGE_BUNDLE, locale);
 
+        List<User> speakers;
+        Map<String, Integer> paginationAttributes;
+        if (request.getSession().getAttribute("speakers") != null){
+            speakers = (List<User>) request.getSession().getAttribute("speakers");
+            paginationAttributes = (Map<String, Integer>) request.getSession().getAttribute("paginationAttributes");
+            request.getSession().removeAttribute("speakers");
+            request.getSession().removeAttribute("paginationAttributes");
+        } else {
+            int speakersCount = userService.getSpeakersIds().size();
+            paginationAttributes = new PaginationUtil().getAttributes(request, speakersCount);
+            speakers = userService.getPaginatedSpeakers(
+                    paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
+        }
+
         long userId = userService.getUserId(login, locale.toString());
         request.setAttribute("userId", userId);
         List<Long> conferencesIds = userService.getConferencesIdsForWhichUserHasRegistration(userId);
@@ -31,15 +49,14 @@ public class RatingCommand extends Command {
         else
             speakersIdsForRating = new ArrayList<>();
 
-        List<User> allSpeakers = userService.getAllSpeakers(locale.toString());
-
         List<Long> allSpeakersIds = userService.getSpeakersIds();
         Map<Long, List<Report>> speakerIdToReports = reportService.getSpeakersReports(allSpeakersIds, locale.toString());
 
         Map<Long, Integer> speakerIdToRating = userService.getSpeakersRating(allSpeakersIds);
         Map<Long, Integer> speakerIdToUserRating = userService.getSpeakersRatingByUser(userId);
 
-        request.setAttribute("allSpeakers", allSpeakers);
+        request.setAttribute("speakers", speakers);
+        request.setAttribute("paginationAttributes", paginationAttributes);
         request.setAttribute("speakersIdsForRating", speakersIdsForRating);
         request.setAttribute("speakerIdToReports", speakerIdToReports);
         request.setAttribute("speakerIdToRating", speakerIdToRating);

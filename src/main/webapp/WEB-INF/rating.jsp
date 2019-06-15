@@ -42,7 +42,7 @@
             </thead>
             <tbody>
 
-            <c:forEach items="${requestScope.allSpeakers}" var="speaker" varStatus="status">
+            <c:forEach items="${requestScope.speakers}" var="speaker" varStatus="status">
                 <tr>
                     <td>${speaker.name}</td>
                     <td>${speaker.surname}</td>
@@ -60,6 +60,8 @@
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/set-rating"
                                   method="post">
                                 <input type="hidden" name="speakerId" value="${speaker.id}">
+                                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
+                                <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
                                 <input type="radio" name="rating" value="1" class="star" onchange="submit()"
                                        <c:if test="${requestScope.speakerIdToUserRating[speaker.id] == 1}">checked</c:if>>
                                 <input type="radio" name="rating" value="2" class="star" onchange="submit()"
@@ -94,6 +96,37 @@
 
             </tbody>
         </table>
+    </div>
+
+    <div class="row">
+        <nav>
+            <ul class="pagination">
+                <c:if test="${paginationAttributes.currentPage != 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="${pageContext.request.contextPath}/${sessionScope.role}/rating?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage-1}">Previous</a>
+                    </li>
+                </c:if>
+                <c:forEach begin="1" end="${paginationAttributes.nOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${paginationAttributes.currentPage eq i}">
+                            <li class="page-item active">
+                                <a class="page-link">${i}<span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="${pageContext.request.contextPath}/${sessionScope.role}/rating?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${i}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <c:if test="${paginationAttributes.currentPage lt paginationAttributes.nOfPages}">
+                    <li class="page-item">
+                        <a class="page-link" href="${pageContext.request.contextPath}/${sessionScope.role}/rating?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage+1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
     </div>
 
 </div>
