@@ -35,9 +35,8 @@ public class RegisterUnregisterConferenceCommand extends Command {
         Map<String, Integer> paginationAttributes =
                 new PaginationUtil().getAttributes(request, conferenceCount);
         request.getSession().setAttribute("paginationAttributes", paginationAttributes);
-        List<Conference> conferences = conferenceService.getPaginatedConferences(
-                paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
-        request.getSession().setAttribute("conferences", conferences);
+
+//        request.getSession().setAttribute("isRedirect", true);
 
         long conferenceId = Long.valueOf(request.getParameter("conferenceId"));
         long userId = userService.getUserId(login, locale.toString());
@@ -47,6 +46,18 @@ public class RegisterUnregisterConferenceCommand extends Command {
 
         if (request.getParameter("command").equals("unregister"))
             userService.unregisterFromConference(userId, conferenceId);
+
+        if (matcher.group(1).equals("past-conferences"))
+            return "redirect:/" +
+                    request.getSession().getAttribute("role") +
+                    URL_BUNDLE.getString("url.redirect.past.conferences");
+
+        if (matcher.group(1).equals("future-conferences"))
+            return "redirect:/" +
+                    request.getSession().getAttribute("role") +
+                    URL_BUNDLE.getString("url.redirect.future.conferences");
+
+        request.getSession().setAttribute("isRedirect", true);
 
         return "redirect:/" +
                 request.getSession().getAttribute("role") +

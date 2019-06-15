@@ -31,7 +31,7 @@
                     <h4 class="card-title">Please, fill in:</h4>
 
                     <form method="post" id="add-conference"
-                          action="${pageContext.request.contextPath}/${sessionScope.role}/add-conference">
+                          action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/add-conference">
 
                         <div class="form-group">
                             <label for="conferenceNameEn"><fmt:message key="html.conference.name.en"/></label>
@@ -68,6 +68,9 @@
 
                         <div class="form-group">
                             <input type="hidden" name="conferenceId" value="${conferenceId}">
+                            <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
+                            <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
+                            <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                             <button type="submit" class="btn btn-primary btn-block">
                                 <fmt:message key="html.conference.save"/>
                             </button>
@@ -77,10 +80,6 @@
                 </article>
             </div>
         </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <a href="${pageContext.request.contextPath}/${sessionScope.role}/conferences">Back to conferences list</a>
     </div>
 
 </div>

@@ -23,8 +23,12 @@
 
     <div class="row">
 
-        <c:if test="${sessionScope.role == 'admin'}">
-            <form action="${pageContext.request.contextPath}/${sessionScope.role}/add-conference" method="post">
+        <c:if test="${sessionScope.role == 'admin' && requestScope.conferencesLink != 'past-conferences'}">
+            <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/add-conference" method="post">
+                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
+                <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
+                <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
+                <input type="hidden" name="isGetForm" value="true">
                 <button class="btn btn-info" type="submit">
                     <fmt:message key="html.add.conference"/>
                 </button>
@@ -93,16 +97,22 @@
                     </c:if>
                     <c:if test="${sessionScope.role == 'admin'}">
                         <td>
-                            <form action="${pageContext.request.contextPath}/${sessionScope.role}/update-conference"
+                            <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/update-conference?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage}"
                                   method="post">
                                 <input type="hidden" name="conferenceId" value="${conference.id}">
+<%--                                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">--%>
+<%--                                <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">--%>
+                                <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                                 <button class="btn btn-info" type="submit">
                                     <fmt:message key="html.update"/>
                                 </button>
                             </form>
-                            <form action="${pageContext.request.contextPath}/${sessionScope.role}/delete-conference"
+                            <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/delete-conference?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage}"
                                   method="post">
                                 <input type="hidden" name="conferenceId" value="${conference.id}">
+<%--                                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">--%>
+<%--                                <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">--%>
+                                <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                                 <button class="btn btn-danger" type="submit">
                                     <fmt:message key="html.delete"/>
                                 </button>

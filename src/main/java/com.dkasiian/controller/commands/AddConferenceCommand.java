@@ -1,16 +1,23 @@
 package com.dkasiian.controller.commands;
 
 import com.dkasiian.controller.utils.FormValidationUtil;
+import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.model.ResourceName;
 import com.dkasiian.model.dto.ConferenceDto;
+import com.dkasiian.model.entities.Conference;
+import com.dkasiian.model.entities.User;
 import com.dkasiian.model.services.ConferenceService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddConferenceCommand extends Command {
 
@@ -24,7 +31,10 @@ public class AddConferenceCommand extends Command {
         ResourceBundle messageBundle = ResourceBundle.getBundle(ResourceName.MESSAGE_BUNDLE, locale);
         ResourceBundle regexBundle = ResourceBundle.getBundle(ResourceName.REGEXP_BUNDLE, locale);
 
-        if (FormValidationUtil.isFormDataValid(request, regexBundle, messageBundle))
+        if (request.getParameter("isGetForm") != null && request.getParameter("isGetForm").equalsIgnoreCase("true"))
+            return URL_BUNDLE.getString("url.forward.add.conference");
+
+        if (!FormValidationUtil.isFormDataValid(request, regexBundle, messageBundle))
             return URL_BUNDLE.getString("url.forward.add.conference");
 
         LocalDateTime conferenceDateTime = LocalDateTime.parse(

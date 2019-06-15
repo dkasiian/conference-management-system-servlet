@@ -10,23 +10,29 @@ public class FormValidationUtil {
     public static boolean isFormDataValid(HttpServletRequest request, ResourceBundle regexBundle, ResourceBundle messageBundle){
         boolean isValid = true;
 
-        if (!request.getParameterNames().hasMoreElements())
-            return true;
+//        if (!request.getParameterNames().hasMoreElements())
+//            return true;
 
         for (String parameter : new ArrayList<>(request.getParameterMap().keySet())) {
-            if (parameter.contains("Id") || parameter.contains("speaker") || parameter.contains("submitted"))
+            if (parameter.contains("Id") ||
+                    parameter.contains("speaker") ||
+                    parameter.contains("submitted") ||
+                    parameter.contains("page") ||
+                    parameter.contains("conferencesLink"))
                 continue;
-            if (!validateParameter(request.getParameter(parameter), regexBundle.getString(parameter + ".regexp"))) {
+            if (request.getParameter(parameter).isEmpty())
+                return false;
+            if (!isParameterValid(request.getParameter(parameter), regexBundle.getString(parameter + ".regexp"))) {
                 request.setAttribute("incorrect_" + parameter, messageBundle.getString("html.validation.incorrect." + parameter));
                 isValid = false;
             } else {
                 request.setAttribute(parameter, request.getParameter(parameter));
             }
         }
-        return !isValid;
+        return isValid;
     }
 
-    private static boolean validateParameter(String parameterData, String regexp) {
+    private static boolean isParameterValid(String parameterData, String regexp) {
         return Pattern.compile(regexp).matcher(parameterData).matches();
     }
 }

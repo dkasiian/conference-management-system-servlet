@@ -32,27 +32,35 @@ public class ConferencesCommand extends Command {
 
         List<Conference> conferences;
         Map<String, Integer> paginationAttributes;
-        if (request.getSession().getAttribute("conferences") != null){
-            conferences = (List<Conference>) request.getSession().getAttribute("conferences");
-            paginationAttributes = (Map<String, Integer>) request.getSession().getAttribute("paginationAttributes");
-            request.setAttribute("conferences", conferences);
-            request.setAttribute("paginationAttributes", paginationAttributes);
+        if (request.getSession().getAttribute("isRedirect") != null){
             request.setAttribute("conferencesLink", request.getSession().getAttribute("conferencesLink"));
-            request.getSession().removeAttribute("conferences");
-            request.getSession().removeAttribute("paginationAttributes");
+            paginationAttributes = (Map<String, Integer>) request.getSession().getAttribute("paginationAttributes");
+            conferences = conferenceService.getPaginatedConferences(
+                    paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
             request.getSession().removeAttribute("conferencesLink");
+            request.getSession().removeAttribute("paginationAttributes");
+            request.getSession().removeAttribute("isRedirect");
+        } else if (request.getSession().getAttribute("afterPastFutureConferences") != null){
+            request.setAttribute("conferencesLink", request.getSession().getAttribute("conferencesLink"));
+            paginationAttributes = (Map<String, Integer>) request.getSession().getAttribute("paginationAttributes");
+            conferences = (List<Conference>) request.getSession().getAttribute("conferences");
+            request.getSession().removeAttribute("conferencesLink");
+            request.getSession().removeAttribute("paginationAttributes");
+            request.getSession().removeAttribute("afterPastFutureConferences");
         } else {
+            Pattern pattern = Pattern.compile("(past-conferences|future-conferences|conferences)");
+            Matcher matcher = pattern.matcher(request.getRequestURI());
+            if (matcher.find())
+                request.setAttribute("conferencesLink", matcher.group(1));
+
             int conferenceCount = conferenceService.getConferencesCount();
             paginationAttributes = new PaginationUtil().getAttributes(request, conferenceCount);
             conferences = conferenceService.getPaginatedConferences(
                     paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
-            request.setAttribute("paginationAttributes", paginationAttributes);
-            request.setAttribute("conferences", conferences);
-            Pattern pattern = Pattern.compile("(past-conferences|future-conferences|conferences(.*))");
-            Matcher matcher = pattern.matcher(request.getRequestURI());
-            if (matcher.find())
-                request.setAttribute("conferencesLink", matcher.group(1));
         }
+
+        request.setAttribute("paginationAttributes", paginationAttributes);
+        request.setAttribute("conferences", conferences);
 
         request.setAttribute("now", LocalDateTime.now());
 

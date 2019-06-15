@@ -33,6 +33,8 @@ public class PastConferencesCommand extends Command {
                 paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
         request.getSession().setAttribute("conferences", pastConferences);
 
+        request.getSession().setAttribute("afterPastFutureConferences", true);
+
         return "redirect:/" +
                 request.getSession().getAttribute("role") +
                 URL_BUNDLE.getString("url.redirect.conferences");

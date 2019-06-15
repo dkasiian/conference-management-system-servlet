@@ -7,10 +7,8 @@ import java.util.Map;
 public class PaginationUtil {
     
     private String getParameter(HttpServletRequest request, String parameter, String defaultParameter) {
-        if (request.getParameter(parameter) != null)
+        if (request.getParameter(parameter) != null && !request.getParameter(parameter).isEmpty())
             return request.getParameter(parameter);
-//        else if (request.getAttribute(parameter) != null)
-//            return (String) request.getAttribute(parameter);
         else
             return defaultParameter;
     }
