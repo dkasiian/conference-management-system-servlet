@@ -59,9 +59,7 @@ public class ConferenceService {
         return conferenceDao.getUsersNumber();
     }
 
-    public Map<Long, Integer> getSpeakersNumber() {
-        return conferenceDao.getSpeakersNumber();
-    }
+    public Map<Long, Integer> getSpeakersNumber() { return conferenceDao.getSpeakersNumber(); }
 
     public int getPastConferencesCount(){
         return conferenceDao.getPastConferencesCount();

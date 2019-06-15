@@ -73,6 +73,37 @@
         </table>
     </div>
 
+    <div class="row">
+        <nav>
+            <ul class="pagination">
+                <c:if test="${paginationAttributes.currentPage != 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="${pageContext.request.contextPath}/${sessionScope.role}/statistics?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage-1}">Previous</a>
+                    </li>
+                </c:if>
+                <c:forEach begin="1" end="${paginationAttributes.nOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${paginationAttributes.currentPage eq i}">
+                            <li class="page-item active">
+                                <a class="page-link">${i}<span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="${pageContext.request.contextPath}/${sessionScope.role}/statistics?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${i}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                <c:if test="${paginationAttributes.currentPage lt paginationAttributes.nOfPages}">
+                    <li class="page-item">
+                        <a class="page-link" href="${pageContext.request.contextPath}/${sessionScope.role}/statistics?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage+1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+    </div>
+
 </div>
 
 </fmt:bundle>

@@ -1,5 +1,6 @@
 package com.dkasiian.controller.commands;
 
+import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.services.ConferenceService;
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +9,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StatisticsCommand extends Command {
 
@@ -19,7 +22,14 @@ public class StatisticsCommand extends Command {
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
 
-        List<Conference> conferences = conferenceService.getAllConferences(locale.toString());
+        int conferenceCount = conferenceService.getConferencesCount();
+        Map<String, Integer> paginationAttributes =
+                new PaginationUtil().getAttributes(request, conferenceCount);
+        request.getSession().setAttribute("paginationAttributes", paginationAttributes);
+        List<Conference> conferences = conferenceService.getPaginatedConferences(
+                paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
+
+
         Map<Long, Integer> conferenceIdSpeakersCount = conferenceService.getSpeakersNumber();
         Map<Long, Integer> conferenceIdReportsCount = conferenceService.getReportsNumber();
         Map<Long, Integer> conferenceIdUsersCount = conferenceService.getUsersNumber();
