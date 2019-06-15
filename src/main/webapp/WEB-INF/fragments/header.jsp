@@ -14,46 +14,46 @@
 <fmt:bundle basename="messages">
     <c:choose>
         <c:when test="${sessionScope.role == 'guest'}">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark mb-3" style="background-color: #63b175;">
                 <div class="container-fluid">
-                    <ul class="nav navbar-nav">
-                        <li>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
                             <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                                 <fmt:message key="html.text.brand"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/guest/conferences">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/guest/conferences">
                                 <fmt:message key="html.text.conferences"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/guest/past-conferences">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/guest/past-conferences">
                                 <fmt:message key="html.text.past.conferences"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/guest/future-conferences">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/guest/future-conferences">
                                 <fmt:message key="html.text.future.conferences"/>
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav navbar-right" >
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/guest/login">
+                    <ul class="navbar-nav navbar-right">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/guest/login">
                                 <fmt:message key="html.text.login"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/guest/registration">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/guest/registration">
                                 <fmt:message key="html.text.registration"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="#">[${sessionScope.role}]</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">[${sessionScope.role}]</a>
                         </li>
-                        <li>
-                            <form method="post" class="form-horizontal"
+                        <li class="nav-item">
+                            <form method="post" class="form-horizontal mb-0"
                                   action="${pageContext.request.contextPath}/${sessionScope.role}/set-language">
                                 <select class="custom-select" name="lang" onchange="submit()">
                                     <option value="en_US" ${sessionScope.lang == 'en_US' ? 'selected' : ''}>English</option>
@@ -66,53 +66,53 @@
             </nav>
         </c:when>
         <c:otherwise>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark mb-3" style="background-color: #63b175;">
                 <div class="container-fluid">
                     <ul class="nav navbar-nav">
-                        <li>
+                        <li class="nav-item">
                             <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                                 <fmt:message key="html.text.brand"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.role}/conferences">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/${sessionScope.role}/conferences">
                                 <fmt:message key="html.text.conferences"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.role}/past-conferences">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/${sessionScope.role}/past-conferences">
                                 <fmt:message key="html.text.past.conferences"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.role}/future-conferences">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/${sessionScope.role}/future-conferences">
                                 <fmt:message key="html.text.future.conferences"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.role}/rating">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/${sessionScope.role}/rating">
                                 <fmt:message key="html.text.rating"/>
                             </a>
                         </li>
                         <c:if test="${sessionScope.role == 'admin'}">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.role}/statistics">
+                                <a class="nav-link text-white" href="${pageContext.request.contextPath}/${sessionScope.role}/statistics">
                                     <fmt:message key="html.text.statistic"/>
                                 </a>
                             </li>
                         </c:if>
                     </ul>
                     <ul class="nav navbar-right" >
-                        <li>
-                            <a class="nav-link" href="${pageContext.request.contextPath}/${sessionScope.role}/logout">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/${sessionScope.role}/logout">
                                 <fmt:message key="html.text.logout"/>
                             </a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="#">[${sessionScope.role}]</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">[${sessionScope.role}]</a>
                         </li>
                         <li>
-                            <form method="post" class="form-horizontal"
+                            <form method="post" class="form-horizontal mb-0"
                                   action="${pageContext.request.contextPath}/${sessionScope.role}/set-language">
                                 <label>
                                     <select class="custom-select form-control" name="lang" onchange="submit()">

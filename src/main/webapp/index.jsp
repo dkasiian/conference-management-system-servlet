@@ -8,7 +8,7 @@
     <meta charset="UTF-8" >
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
-<%--    <link href="<c:url value='/css/bootstrap-grid.css' />" rel="stylesheet">--%>
+    <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
     <title><fmt:message key="html.title.index"/></title>

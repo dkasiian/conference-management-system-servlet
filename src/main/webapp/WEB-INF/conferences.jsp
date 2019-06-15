@@ -2,12 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 
 <html>
 <head>
     <meta charset="UTF-8">
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
     <title>Conferences</title>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
@@ -17,11 +19,11 @@
 <jsp:include page="/WEB-INF/fragments/header.jsp"/>
 
 <div class="container">
-    <div class="row">
-        <h1 class="text-center">Available conferences:</h1>
+    <div class="row justify-content-center">
+        <h1 class="text-center">Here you can find all conferences:</h1>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
 
         <c:if test="${sessionScope.role == 'admin' && requestScope.conferencesLink != 'past-conferences'}">
             <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/add-conference" method="post">
@@ -35,7 +37,7 @@
             </form>
         </c:if>
 
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped text-center">
             <thead class="thead-dark">
             <tr>
                 <th><fmt:message key="html.conference"/></th>
@@ -52,17 +54,17 @@
             <tbody>
             <c:forEach items="${requestScope.conferences}" var="conference" varStatus="status">
                 <tr>
-                    <td>
+                    <td class="align-middle">
                         <form action="${pageContext.request.contextPath}/${sessionScope.role}/conferences/${conference.id}/reports"
                               method="post">
                             <input type="hidden" name="conferenceId" value="${conference.id}">
                             <button class="btn btn-dark" type="submit">${conference.name}</button>
                         </form>
                     </td>
-                    <td>${conference.dateTime}</td>
-                    <td>${conference.location}</td>
+                    <td class="align-middle">${f:formatLocalDateTime(conference.dateTime, 'dd.MM.yyyy HH:mm')}</td>
+                    <td class="align-middle">${conference.location}</td>
                     <c:if test="${sessionScope.role != 'guest'}">
-                    <td>
+                    <td class="align-middle">
                         <c:choose>
                             <c:when test="${requestScope.isRegister[status.index]}">
                                 <form action="${pageContext.request.contextPath}/${sessionScope.role}/register-unregister"
@@ -96,7 +98,7 @@
                     </td>
                     </c:if>
                     <c:if test="${sessionScope.role == 'admin'}">
-                        <td>
+                        <td class="align-middle">
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/update-conference?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage}"
                                   method="post">
                                 <input type="hidden" name="conferenceId" value="${conference.id}">

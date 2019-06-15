@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-success btn-block">
                                 <fmt:message key="html.text.sign.up"/>
                             </button>
                         </div>

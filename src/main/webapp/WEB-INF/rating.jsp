@@ -8,6 +8,7 @@
     <meta charset="UTF-8" >
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
 
     <!-- RATING -->
     <link href="<c:url value="/css/jquery.rating.css"/>" rel="stylesheet" type="text/css">
@@ -24,12 +25,12 @@
 <jsp:include page="fragments/header.jsp"/>
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <h3 class="text-center">Speakers and their rating:</h3>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
 
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped text-center">
             <thead class="thead-dark">
             <tr>
                 <th>Name</th>
@@ -44,17 +45,17 @@
 
             <c:forEach items="${requestScope.speakers}" var="speaker" varStatus="status">
                 <tr>
-                    <td>${speaker.name}</td>
-                    <td>${speaker.surname}</td>
-                    <td>${speaker.email}</td>
-                    <td>
+                    <td class="align-middle">${speaker.name}</td>
+                    <td class="align-middle">${speaker.surname}</td>
+                    <td class="align-middle">${speaker.email}</td>
+                    <td class="align-middle">
                         <ul>
                             <c:forEach items="${requestScope.speakerIdToReports[speaker.id]}" var="report">
                                 <li>${report.theme}</li>
                             </c:forEach>
                         </ul>
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <c:if test="${requestScope.speakersIdsForRating.contains(speaker.id)}">
                             <c:if test="${speaker.id != userId}">
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/set-rating"
@@ -76,7 +77,7 @@
                             </c:if>
                         </c:if>
                     </td>
-                    <td>
+                    <td class="align-middle">
                         <form>
                             <input type="radio" name="rating" value="1" class="star" disabled
                                    <c:if test="${requestScope.speakerIdToRating[speaker.id] == 1}">checked</c:if>>
@@ -89,7 +90,6 @@
                             <input type="radio" name="rating" value="5" class="star" disabled
                                    <c:if test="${requestScope.speakerIdToRating[speaker.id] == 5}">checked</c:if>>
                         </form>
-
                     </td>
                 </tr>
             </c:forEach>

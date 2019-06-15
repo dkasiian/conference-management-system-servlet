@@ -8,6 +8,7 @@
     <meta charset="UTF-8" >
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
     <title>Statistics</title>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
@@ -17,11 +18,11 @@
 <jsp:include page="/WEB-INF/fragments/header.jsp"/>
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <h1 class="text-center">Statistics:</h1>
     </div>
-    <div class="row">
-        <table class="table table-bordered table-striped">
+    <div class="row justify-content-center">
+        <table class="table table-bordered table-striped text-center">
             <thead class="thead-dark">
                 <tr>
                     <th>Conference name</th>
@@ -34,9 +35,9 @@
             <tbody>
                 <c:forEach items="${requestScope.conferences}" var="conference" varStatus="status">
                     <tr>
-                        <td>${conference.name}</td>
-                        <td>${requestScope.conferenceIdSpeakersCount[conference.id]}</td>
-                        <td>
+                        <td class="align-middle">${conference.name}</td>
+                        <td class="align-middle">${requestScope.conferenceIdSpeakersCount[conference.id]}</td>
+                        <td class="align-middle">
                             <c:choose>
                                 <c:when test="${requestScope.conferenceIdReportsCount[conference.id] == null}">
                                     0
@@ -46,7 +47,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <c:choose>
                                 <c:when test="${requestScope.conferenceIdUsersCount[conference.id] == null}">
                                     0
@@ -56,7 +57,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td>
+                        <td class="align-middle">
                             <c:choose>
                                 <c:when test="${requestScope.conferenceIdVisitors[conference.id] == null}">
                                     0

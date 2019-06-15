@@ -2,12 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 
 <html>
 <head>
     <meta charset="UTF-8" >
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
     <title>Reports</title>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
@@ -17,10 +19,10 @@
 <jsp:include page="/WEB-INF/fragments/header.jsp"/>
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <h1 class="text-center">Available reports:</h1>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
 
         <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'speaker'}">
             <form action="${pageContext.request.contextPath}/${sessionScope.role}/add-report" method="post">
@@ -31,7 +33,7 @@
             </form>
         </c:if>
 
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped text-center">
             <thead class="thead-dark">
             <tr>
                 <th>Theme</th>
@@ -48,15 +50,13 @@
 
             <c:forEach items="${requestScope.reports}" var="report" varStatus="status">
                 <tr>
-                    <td>
-                            ${report.theme}
-                    </td>
-                    <td>${report.dateTime}</td>
-                    <td>${requestScope.speakers.get(status.index).name}</td>
-                    <td>${requestScope.speakers.get(status.index).surname}</td>
-                    <td>${requestScope.speakers.get(status.index).email}</td>
+                    <td class="align-middle">${report.theme}</td>
+                    <td class="align-middle">${f:formatLocalDateTime(report.dateTime, 'dd.MM.yyyy HH:mm')}</td>
+                    <td class="align-middle">${requestScope.speakers.get(status.index).name}</td>
+                    <td class="align-middle">${requestScope.speakers.get(status.index).surname}</td>
+                    <td class="align-middle">${requestScope.speakers.get(status.index).email}</td>
                     <c:if test="${sessionScope.role == 'admin' || (sessionScope.role == 'speaker' && report.speakerId == userId)}">
-                        <td>
+                        <td class="align-middle">
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/update-report"
                                   method="post">
                                 <input type="hidden" name="conferenceId" value="${conferenceId}">

@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
+    <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
     <title><fmt:message key="html.title.login"/></title>
 </head>
 <body>
@@ -33,7 +34,7 @@
                             <div class="text-danger">${incorrect_password}</div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-success btn-block">
                                 <fmt:message key="html.text.login"/>
                             </button>
                         </div>
