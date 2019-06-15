@@ -19,15 +19,15 @@ public class DeleteReportCommand extends Command {
             return "redirect:/" +
                     request.getSession().getAttribute("role") +
                     URL_BUNDLE.getString("url.redirect.conferences") +
-                    "/" + request.getParameter("conferenceId") +
+                    "/" + conferenceId +
                     URL_BUNDLE.getString("url.redirect.reports");
 
         if (!reportService.delete(Long.valueOf(request.getParameter("reportId"))))
             throw new RuntimeException();
 
-            return  "redirect:/" + request.getSession().getAttribute("role") +
-                    URL_BUNDLE.getString("url.redirect.conferences") +
-                    "/" + conferenceId +
-                    URL_BUNDLE.getString("url.redirect.reports");
+        return  "redirect:/" + request.getSession().getAttribute("role") +
+                URL_BUNDLE.getString("url.redirect.conferences") +
+                "/" + conferenceId +
+                URL_BUNDLE.getString("url.redirect.reports");
     }
 }

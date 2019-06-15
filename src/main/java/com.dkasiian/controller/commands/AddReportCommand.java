@@ -54,7 +54,7 @@ public class AddReportCommand extends Command {
             return URL_BUNDLE.getString("url.forward.add.report");
         }
 
-        if (FormValidationUtil.isFormDataValid(request, regexBundle, messageBundle))
+        if (!FormValidationUtil.isFormDataValid(request, regexBundle, messageBundle))
             return URL_BUNDLE.getString("url.forward.add.report");
 
         Conference conference = conferenceService
@@ -80,9 +80,14 @@ public class AddReportCommand extends Command {
                     .setSpeakerId(Long.valueOf(request.getParameter("speaker")))
                     .build()
             );
+//            return "redirect:/" +
+//                    request.getSession().getAttribute("role") +
+//                    URL_BUNDLE.getString("url.redirect.conferences");
             return "redirect:/" +
                     request.getSession().getAttribute("role") +
-                    URL_BUNDLE.getString("url.redirect.conferences");
+                    URL_BUNDLE.getString("url.redirect.conferences") +
+                    "/" + conference.getId() +
+                    URL_BUNDLE.getString("url.redirect.reports");
         }
 
         // Add new
@@ -93,9 +98,14 @@ public class AddReportCommand extends Command {
                 .setSpeakerId(Long.parseLong(request.getParameter("speaker")))
                 .build());
 
-        return "redirect:/"
-                + request.getSession().getAttribute("role")
-                + URL_BUNDLE.getString("url.redirect.conferences");
+//        return "redirect:/"
+//                + request.getSession().getAttribute("role")
+//                + URL_BUNDLE.getString("url.redirect.conferences");
+        return "redirect:/" +
+                request.getSession().getAttribute("role") +
+                URL_BUNDLE.getString("url.redirect.conferences") +
+                "/" + conference.getId() +
+                URL_BUNDLE.getString("url.redirect.reports");
     }
 
 }

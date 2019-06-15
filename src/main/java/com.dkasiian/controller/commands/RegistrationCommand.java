@@ -28,7 +28,7 @@ public class RegistrationCommand extends Command {
 
         LOG.debug("locale: " + locale.toString());
 
-        if (FormValidationUtil.isFormDataValid(request, regexBundle, messageBundle))
+        if (!FormValidationUtil.isFormDataValid(request, regexBundle, messageBundle))
             return URL_BUNDLE.getString("url.forward.registration");
 
         if (userService.isUserExist(request.getParameter("login"))) {

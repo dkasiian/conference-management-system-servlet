@@ -2,26 +2,25 @@ package com.dkasiian.controller.utils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class FormValidationUtil {
 
     public static boolean isFormDataValid(HttpServletRequest request, ResourceBundle regexBundle, ResourceBundle messageBundle){
+        List<String> parameters = new ArrayList<>(request.getParameterMap().keySet());
+        if (parameters.isEmpty())
+            return false;
+
         boolean isValid = true;
-
-//        if (!request.getParameterNames().hasMoreElements())
-//            return true;
-
-        for (String parameter : new ArrayList<>(request.getParameterMap().keySet())) {
+        for (String parameter : parameters) {
             if (parameter.contains("Id") ||
                     parameter.contains("speaker") ||
                     parameter.contains("submitted") ||
                     parameter.contains("page") ||
                     parameter.contains("conferencesLink"))
                 continue;
-            if (request.getParameter(parameter).isEmpty())
-                return false;
             if (!isParameterValid(request.getParameter(parameter), regexBundle.getString(parameter + ".regexp"))) {
                 request.setAttribute("incorrect_" + parameter, messageBundle.getString("html.validation.incorrect." + parameter));
                 isValid = false;
