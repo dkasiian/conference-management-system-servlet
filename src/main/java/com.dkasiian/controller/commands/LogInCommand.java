@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -54,9 +55,10 @@ public class LogInCommand extends Command {
             request.getSession().setAttribute("role", userService.getRole(login).name().toLowerCase());
             request.getSession().getServletContext().setAttribute(login, request.getSession());
             LOG.info("LogInCommand :: process :: User with login: " + login + ", signed in");
-            return "redirect:/" +
-                    userService.getRoleByLogin(login, locale.toString()) +
-                    URL_BUNDLE.getString("url.redirect.conferences");
+//            return "redirect:/" +
+//                    userService.getRoleByLogin(login, locale.toString()) +
+//                    URL_BUNDLE.getString("url.redirect.conferences");
+            return URL_BUNDLE.getString("url.redirect.root");
         } else {
             LOG.warn("LogInCommand :: process :: Non-existent password");
             request.setAttribute("incorrect_password", messageBundle.getString("html.validation.fail.check.password"));

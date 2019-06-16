@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://example.com/functions" prefix="f" %>
 
 <html>
 <head>
@@ -17,12 +18,46 @@
 
 <jsp:include page="WEB-INF/fragments/header.jsp"/>
 <div class="container">
-    <div class="row justify-content-center">
-        <h1><fmt:message key="html.text.index.welcome"/></h1>
-    </div>
-    <div class="row justify-content-center">
-        <p><fmt:message key="html.text.index.main"/></p>
-    </div>
+    <c:if test="${sessionScope.role == 'guest'}">
+        <div class="row justify-content-center">
+            <h1><fmt:message key="html.text.index.welcome"/></h1>
+        </div>
+        <div class="row justify-content-center">
+            <p><fmt:message key="html.text.index.main"/></p>
+        </div>
+    </c:if>
+
+    <c:if test="${sessionScope.role != 'guest'}">
+        <c:choose>
+            <c:when test="${requestScope.conferences.isEmpty()}">
+                <h3 class="text-center">Here will be your Announcements, but know it seems your have no one :(</h3>
+            </c:when>
+            <c:otherwise>
+                <h3 class="text-center mb-2">Your Announcements:</h3>
+                <c:forEach items="${requestScope.conferences}" var="conference" varStatus="status">
+                    <div class="card border-success mb-3 text-center">
+                        <div class="card-header">
+                            <strong class="text-success h3">${conference.name}</strong>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                You have registered for this conference. Don't miss it.
+                                <br>
+                                <em>${f:formatLocalDateTime(conference.dateTime, 'dd.MM.yyyy HH:mm')}</em>
+                                <br>
+                                <em>${conference.location}</em>
+                            </p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div>Days : Hours : Minutes</div>
+                                ${requestScope.remainingTimes[status.index]}
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
+    </c:if>
+
 </div>
 </fmt:bundle>
 

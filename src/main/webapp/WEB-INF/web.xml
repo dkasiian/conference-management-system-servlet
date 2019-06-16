@@ -10,6 +10,17 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <!-- ********** SERVLETS ********** -->
+    <servlet>
+        <servlet-name>IndexController</servlet-name>
+        <servlet-class>com.dkasiian.controller.IndexController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexController</servlet-name>
+        <url-pattern></url-pattern>
+<!--        <url-pattern>/index.jsp</url-pattern>-->
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>MainController</servlet-name>
         <servlet-class>com.dkasiian.controller.MainController</servlet-class>
@@ -21,6 +32,7 @@
         <url-pattern>/speaker/*</url-pattern>
         <url-pattern>/admin/*</url-pattern>
     </servlet-mapping>
+    <!-- ********** SERVLETS END ********** -->
 
     <!-- ********** FILTERS ********** -->
     <filter>

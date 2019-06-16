@@ -66,7 +66,7 @@
                                 </button>
                             </form>
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/delete-report"
-                                  method="post">
+                                  method="post" class="mb-0">
                                 <input type="hidden" name="conferenceId" value="${conferenceId}">
                                 <input type="hidden" name="reportId" value="${report.id}">
                                 <button class="btn btn-danger" type="submit">

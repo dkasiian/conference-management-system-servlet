@@ -49,6 +49,9 @@
                 <c:if test="${sessionScope.role == 'admin'}">
                     <th>Action</th>
                 </c:if>
+<%--                <c:if test="${sessionScope.role != 'guest'}">--%>
+<%--                    <th>Announcement</th>--%>
+<%--                </c:if>--%>
             </tr>
             </thead>
             <tbody>
@@ -56,7 +59,7 @@
                 <tr>
                     <td class="align-middle">
                         <form action="${pageContext.request.contextPath}/${sessionScope.role}/conferences/${conference.id}/reports"
-                              method="post">
+                              method="post" class="mb-0">
                             <input type="hidden" name="conferenceId" value="${conference.id}">
                             <button class="btn btn-dark" type="submit">${conference.name}</button>
                         </form>
@@ -68,21 +71,21 @@
                         <c:choose>
                             <c:when test="${requestScope.isRegister[status.index]}">
                                 <form action="${pageContext.request.contextPath}/${sessionScope.role}/register-unregister"
-                                      method="post">
+                                      method="post" class="mb-0">
                                     <input type="hidden" name="conferenceId" value="${conference.id}">
                                     <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
                                     <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
                                     <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                                     <input type="hidden" name="command" value="unregister">
-                                    <button type="submit" class="btn btn-warning"
-                                            <c:if test="${conference.dateTime < now}">disabled</c:if>>
+                                    <button type="submit" <c:if test="${conference.dateTime < now}">disabled</c:if>
+                                            class="btn btn-warning">
                                         Unregister
                                     </button>
                                 </form>
                             </c:when>
                             <c:otherwise>
                                 <form action="${pageContext.request.contextPath}/${sessionScope.role}/register-unregister"
-                                      method="post">
+                                      method="post" class="mb-0">
                                     <input type="hidden" name="conferenceId" value="${conference.id}">
                                     <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
                                     <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
@@ -110,7 +113,7 @@
                                 </button>
                             </form>
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/delete-conference?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage}"
-                                  method="post">
+                                  method="post" class="mb-0">
                                 <input type="hidden" name="conferenceId" value="${conference.id}">
 <%--                                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">--%>
 <%--                                <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">--%>

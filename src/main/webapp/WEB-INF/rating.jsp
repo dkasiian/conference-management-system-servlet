@@ -39,6 +39,7 @@
                 <th>Reports</th>
                 <th>User Rating</th>
                 <th>Average Rating</th>
+                <th>Bonuses</th>
             </tr>
             </thead>
             <tbody>
@@ -49,7 +50,7 @@
                     <td class="align-middle">${speaker.surname}</td>
                     <td class="align-middle">${speaker.email}</td>
                     <td class="align-middle">
-                        <ul>
+                        <ul class="mb-0 pl-0" style="list-style: none;">
                             <c:forEach items="${requestScope.speakerIdToReports[speaker.id]}" var="report">
                                 <li>${report.theme}</li>
                             </c:forEach>
@@ -90,6 +91,9 @@
                             <input type="radio" name="rating" value="5" class="star" disabled
                                    <c:if test="${requestScope.speakerIdToRating[speaker.id] == 5}">checked</c:if>>
                         </form>
+                    </td>
+                    <td class="align-middle">
+
                     </td>
                 </tr>
             </c:forEach>
