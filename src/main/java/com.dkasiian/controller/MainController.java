@@ -2,6 +2,7 @@ package com.dkasiian.controller;
 
 import com.dkasiian.controller.commands.Command;
 import com.dkasiian.controller.commands.CommandFactory;
+import com.dkasiian.model.exceptions.NotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 public class MainController extends HttpServlet {
 
@@ -24,9 +26,14 @@ public class MainController extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Command commandFromRequest = CommandFactory.getCommandFromRequest(request);
+        Optional<Command> commandFromRequest = CommandFactory.getCommandFromRequest(request);
 
-        String pageUrl = commandFromRequest.process(request);
+        if (!commandFromRequest.isPresent()) {
+            LOG.warn("Command Not Found");
+            throw new NotFoundException();
+        }
+
+        String pageUrl = commandFromRequest.get().process(request);
 
         if (pageUrl.contains("redirect:")) {
             LOG.info("MainController :: process :: Redirect to page: " + pageUrl);

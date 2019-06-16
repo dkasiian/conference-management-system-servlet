@@ -72,7 +72,7 @@
                             <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
                             <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
                             <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-success btn-block">
                                 <fmt:message key="html.conference.save"/>
                             </button>
                         </div>

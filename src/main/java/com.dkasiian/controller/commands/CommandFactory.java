@@ -4,18 +4,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 public class CommandFactory {
 
     private final static Logger LOG = LogManager.getLogger(CommandFactory.class);
 
-    public static Command getCommandFromRequest(HttpServletRequest request) {
+    public static Optional<Command> getCommandFromRequest(HttpServletRequest request) {
         String[] splitUri = request.getRequestURI().split("/");
         String uriCommand = splitUri[splitUri.length - 1];
 
         LOG.debug("The command from the request uri is: " + uriCommand);
 
-        return getCommand(uriCommand);
+        return Optional.ofNullable(getCommand(uriCommand));
     }
 
     private static Command getCommand(String type){
@@ -64,6 +65,6 @@ public class CommandFactory {
         } else if (type.equalsIgnoreCase("STATISTICS")){
             return new StatisticsCommand();
         }
-        return new BaseCommand();
+        return null;
     }
 }

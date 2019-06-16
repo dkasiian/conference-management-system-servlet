@@ -85,7 +85,7 @@
                             <input type="hidden" name="submitted" value="true">
                             <input type="hidden" name="conferenceId" value="${conferenceId}">
                             <input type="hidden" name="reportId" value="${reportId}">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-success btn-block">
                                 <fmt:message key="html.report.save"/>
                             </button>
                         </div>

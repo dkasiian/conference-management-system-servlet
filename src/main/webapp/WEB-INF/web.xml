@@ -60,4 +60,19 @@
     </listener>
     <!-- ********** LISTENERS END ********** -->
 
+    <!-- ********** ERROR_PAGES ********** -->
+    <error-page>
+        <exception-type>com.dkasiian.model.exceptions.NotFoundException</exception-type>
+        <location>/WEB-INF/errors/notFoundError.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>com.dkasiian.model.exceptions.AccessDeniedException</exception-type>
+        <location>/WEB-INF/errors/accessDeniedError.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/errors/internalServerError.jsp</location>
+    </error-page>
+    <!-- ********** ERROR_PAGES END ********** -->
+
 </web-app>
