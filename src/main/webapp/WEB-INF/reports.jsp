@@ -112,6 +112,19 @@
                 </c:if>
             </ul>
         </nav>
+
+        <div>
+            <form action="${pageContext.request.contextPath}/${sessionScope.role}/conferences/${conferenceId}/reports"
+                  class="form-inline" onchange="submit()">
+                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
+                <label class="ml-2" for="records">Records per page:</label>
+                <select class="custom-select ml-1" id="records" name="records-per-page">
+                    <option value="5" <c:if test="${paginationAttributes.recordsPerPage == 5}">selected</c:if>>5</option>
+                    <option value="10" <c:if test="${paginationAttributes.recordsPerPage == 10}">selected</c:if>>10</option>
+                    <option value="15" <c:if test="${paginationAttributes.recordsPerPage == 15}">selected</c:if>>15</option>
+                </select>
+            </form>
+        </div>
     </div>
     </c:if>
 
