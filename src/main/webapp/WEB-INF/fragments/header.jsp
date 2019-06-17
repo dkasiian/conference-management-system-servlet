@@ -41,7 +41,7 @@
                     <ul class="navbar-nav navbar-right">
                         <li class="nav-item">
                             <a class="nav-link text-white" href="${pageContext.request.contextPath}/guest/login">
-                                <fmt:message key="html.text.login"/>
+                                <fmt:message key="html.text.log.in"/>
                             </a>
                         </li>
                         <li class="nav-item">

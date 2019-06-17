@@ -5,13 +5,13 @@
 
 <html>
 <head>
-    <fmt:bundle basename="messages">
     <meta charset="UTF-8">
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
-    <title><fmt:message key="html.title.not.found"/></title>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
+    <fmt:bundle basename="messages">
+    <title><fmt:message key="html.title.not.found"/></title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
     </div>
     <div class="row justify-content-center">
         <a class="btn btn-success" href="<c:url value="/"/>" role="button">
-            <fmt:message key="html.back.home"/>
+            <fmt:message key="html.text.back.home"/>
         </a>
     </div>
 </div>

@@ -20,22 +20,22 @@
         <div class="col col-lg-4">
             <div class="card">
                 <article class="card-body">
-                    <h4 class="card-title"><fmt:message key="html.login.form.text.head"/></h4>
+                    <h4 class="card-title"><fmt:message key="html.text.login.form.head"/></h4>
 
                     <form method="post">
                         <div class="form-group">
-                            <label for="login"><fmt:message key="html.text.login"/></label>
+                            <label for="login"><fmt:message key="html.text.login.form.login"/></label>
                             <input id="login" class="form-control" type="text" name="login"/>
                             <div class="text-danger">${incorrect_login}</div>
                         </div>
                         <div class="form-group">
-                            <label for="password"><fmt:message key="html.text.password"/></label>
+                            <label for="password"><fmt:message key="html.text.login.form.password"/></label>
                             <input id="password" class="form-control" type="password" name="password"/>
                             <div class="text-danger">${incorrect_password}</div>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-block">
-                                <fmt:message key="html.text.login"/>
+                                <fmt:message key="html.text.log.in"/>
                             </button>
                         </div>
                     </form>

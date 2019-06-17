@@ -18,7 +18,7 @@
 <%--    END DATE TIME PICKER --%>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
-    <title>TITLE</title>
+    <title><fmt:message key="html.title.add.conference"/></title>
 </head>
 <body>
 
@@ -35,19 +35,19 @@
                           action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/add-conference">
 
                         <div class="form-group">
-                            <label for="conferenceNameEn"><fmt:message key="html.conference.name.en"/></label>
+                            <label for="conferenceNameEn"><fmt:message key="html.add.conference.form.name.en"/></label>
                             <input type="text" id="conferenceNameEn" name="conferenceNameEn"
                                    class="form-control" value="${conferenceNameEn}">
                             <div class="text-danger"> ${incorrect_conferenceNameEn}</div>
                         </div>
                         <div class="form-group">
-                            <label for="conferenceNameUa"><fmt:message key="html.conference.name.ua"/></label>
+                            <label for="conferenceNameUa"><fmt:message key="html.add.conference.form.name.ua"/></label>
                             <input type="text" id="conferenceNameUa" name="conferenceNameUa"
                                    class="form-control" value="${conferenceNameUa}">
                             <div class="text-danger"> ${incorrect_conferenceNameUa}</div>
                         </div>
                         <div class="form-group">
-                            <label for="datetime"><fmt:message key="html.conference.date"/></label>
+                            <label for="datetime"><fmt:message key="html.add.conference.form.date"/></label>
                             <div id="datetime"></div>
                             <input type="hidden" id="datetime" name="datetime" class="form-control" value="" />
                             <div class="text-danger"> ${incorrect_datetime}</div>
@@ -57,12 +57,12 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="locationEn"><fmt:message key="html.conference.location.en"/></label>
+                            <label for="locationEn"><fmt:message key="html.add.conference.form.location.en"/></label>
                             <input type="text" id="locationEn" name="locationEn" class="form-control" value="${locationEn}">
                             <div class="text-danger"> ${incorrect_locationEn}</div>
                         </div>
                         <div class="form-group">
-                            <label for="locationUa"><fmt:message key="html.conference.location.ua"/></label>
+                            <label for="locationUa"><fmt:message key="html.add.conference.form.location.ua"/></label>
                             <input type="text" id="locationUa" name="locationUa" class="form-control" value="${locationUa}">
                             <div class="text-danger"> ${incorrect_locationUa}</div>
                         </div>
@@ -73,7 +73,7 @@
                             <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">
                             <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                             <button type="submit" class="btn btn-success btn-block">
-                                <fmt:message key="html.conference.save"/>
+                                <fmt:message key="html.add.conference.form.save"/>
                             </button>
                         </div>
 

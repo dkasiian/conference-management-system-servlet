@@ -32,7 +32,7 @@
         <div class="row justify-content-center">
             <form action="${pageContext.request.contextPath}/" class="form-inline" onchange="submit()">
                 <label class="ml-2 text-center" for="records">
-                    Choose how many days you will be notified about the upcoming conference:
+                    <fmt:message key="html.text.index.days.to.announcements" />
                 </label>
                 <select class="custom-select ml-1" id="records" name="daysToAnnouncement">
                     <c:choose>
@@ -57,10 +57,10 @@
 
         <c:choose>
             <c:when test="${requestScope.conferences.isEmpty()}">
-                <h3 class="text-center">Here will be your Announcements, but know it seems your have no one :(</h3>
+                <h3 class="text-center"><fmt:message key="html.text.index.no.announcements" /></h3>
             </c:when>
             <c:otherwise>
-                <h3 class="text-center mb-2">Your Announcements:</h3>
+                <h3 class="text-center mb-2"><fmt:message key="html.text.index.announcements" /></h3>
 
                 <c:forEach items="${requestScope.conferences}" var="conference" varStatus="status">
                     <div class="card border-success mb-3 text-center">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">
-                                You have registered for this conference. Don't miss it.
+                                <fmt:message key="html.text.index.message.about.registration" />
                                 <br>
                                 <em>${f:formatLocalDateTime(conference.dateTime, 'dd.MM.yyyy HH:mm')}</em>
                                 <br>
@@ -77,7 +77,7 @@
                             </p>
                         </div>
                         <div class="card-footer text-muted">
-                            <div>Days : Hours : Minutes</div>
+                            <div><fmt:message key="html.text.index.remaining.time.placeholders" /></div>
                                 ${requestScope.remainingTimes[status.index]}
                         </div>
                     </div>

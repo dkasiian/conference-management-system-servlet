@@ -10,9 +10,9 @@
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
-    <title>Reports</title>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
+    <title><fmt:message key="html.title.reports"/></title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="text-center">Available reports:</h1>
+        <h2 class="text-center"><fmt:message key="html.text.reports.heading"/></h2>
     </div>
     <div class="row justify-content-center">
 
@@ -28,7 +28,7 @@
             <form action="${pageContext.request.contextPath}/${sessionScope.role}/add-report" method="post">
                 <input type="hidden" name="conferenceId" value="${conferenceId}">
                 <button class="btn btn-info" type="submit">
-                    <fmt:message key="html.add.report"/>
+                    <fmt:message key="html.text.reports.add.report"/>
                 </button>
             </form>
         </c:if>
@@ -36,13 +36,13 @@
         <table class="table table-bordered table-striped text-center">
             <thead class="thead-dark">
             <tr>
-                <th>Theme</th>
-                <th>Date time</th>
-                <th>Speaker Name</th>
-                <th>Speaker Last Name</th>
-                <th>Speaker email</th>
+                <th><fmt:message key="html.text.reports.report.theme"/></th>
+                <th><fmt:message key="html.text.reports.report.datetime"/></th>
+                <th><fmt:message key="html.text.reports.report.speaker.name"/></th>
+                <th><fmt:message key="html.text.reports.report.speaker.surname"/></th>
+                <th><fmt:message key="html.text.reports.report.speaker.email"/></th>
                 <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'speaker'}">
-                    <th>Action</th>
+                    <th><fmt:message key="html.text.button.action"/></th>
                 </c:if>
             </tr>
             </thead>
@@ -62,7 +62,7 @@
                                 <input type="hidden" name="conferenceId" value="${conferenceId}">
                                 <input type="hidden" name="reportId" value="${report.id}">
                                 <button class="btn btn-info" type="submit">
-                                    <fmt:message key="html.update"/>
+                                    <fmt:message key="html.text.button.update"/>
                                 </button>
                             </form>
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/delete-report"
@@ -70,7 +70,7 @@
                                 <input type="hidden" name="conferenceId" value="${conferenceId}">
                                 <input type="hidden" name="reportId" value="${report.id}">
                                 <button class="btn btn-danger" type="submit">
-                                    <fmt:message key="html.delete"/>
+                                    <fmt:message key="html.text.button.delete"/>
                                 </button>
                             </form>
                         </td>
@@ -88,7 +88,7 @@
             <ul class="pagination">
                 <c:if test="${paginationAttributes.currentPage != 1}">
                     <li class="page-item">
-                        <a class="page-link" href="/${sessionScope.role}/conferences/${conferenceId}/reports?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage-1}">Previous</a>
+                        <a class="page-link" href="/${sessionScope.role}/conferences/${conferenceId}/reports?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage-1}"><fmt:message key="html.text.pagination.previous" /></a>
                     </li>
                 </c:if>
                 <c:forEach begin="1" end="${paginationAttributes.nOfPages}" var="i">
@@ -107,7 +107,7 @@
                 </c:forEach>
                 <c:if test="${paginationAttributes.currentPage lt paginationAttributes.nOfPages}">
                     <li class="page-item">
-                        <a class="page-link" href="/${sessionScope.role}/conferences/${conferenceId}/reports?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage+1}">Next</a>
+                        <a class="page-link" href="/${sessionScope.role}/conferences/${conferenceId}/reports?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage+1}"><fmt:message key="html.text.pagination.next" /></a>
                     </li>
                 </c:if>
             </ul>
@@ -117,7 +117,7 @@
             <form action="${pageContext.request.contextPath}/${sessionScope.role}/conferences/${conferenceId}/reports"
                   class="form-inline" onchange="submit()">
                 <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
-                <label class="ml-2" for="records">Records per page:</label>
+                <label class="ml-2" for="records"><fmt:message key="html.text.pagination.records.per.page" /></label>
                 <select class="custom-select ml-1" id="records" name="records-per-page">
                     <option value="5" <c:if test="${paginationAttributes.recordsPerPage == 5}">selected</c:if>>5</option>
                     <option value="10" <c:if test="${paginationAttributes.recordsPerPage == 10}">selected</c:if>>10</option>

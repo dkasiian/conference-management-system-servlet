@@ -19,7 +19,7 @@
     <%--    END DATE TIME PICKER --%>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
-    <title>TITLE</title>
+    <title><fmt:message key="html.title.add.report"/></title>
 </head>
 <body>
 
@@ -38,19 +38,19 @@
                         <input type="hidden" name="reportId" value="${reportId}">
 
                         <div class="form-group">
-                            <label for="reportThemeEn"><fmt:message key="html.report.theme.en"/></label>
+                            <label for="reportThemeEn"><fmt:message key="html.add.report.form.theme.en"/></label>
                             <input type="text" id="reportThemeEn" name="reportThemeEn"
                                    class="form-control" value="${reportThemeEn}">
                             <div class="text-danger"> ${incorrect_reportThemeEn}</div>
                         </div>
                         <div class="form-group">
-                            <label for="reportThemeUa"><fmt:message key="html.report.theme.ua"/></label>
+                            <label for="reportThemeUa"><fmt:message key="html.add.report.form.theme.ua"/></label>
                             <input type="text" id="reportThemeUa" name="reportThemeUa"
                                    class="form-control" value="${reportThemeUa}">
                             <div class="text-danger"> ${incorrect_reportThemeUa}</div>
                         </div>
                         <div class="form-group">
-                            <label for="datetime"><fmt:message key="html.report.date"/></label>
+                            <label for="datetime"><fmt:message key="html.add.report.form.date"/></label>
                             <div id="datetime"></div>
                             <input type="hidden" id="datetime" name="datetime" class="form-control" value="" />
                             <div class="text-danger"> ${incorrect_datetime}</div>
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="speaker"><fmt:message key="html.report.speaker" /></label>
+                            <label for="speaker"><fmt:message key="html.add.report.form.speaker" /></label>
                             <select id="speaker" name="speaker" class="custom-select form-control" >
                                 <c:if test="${sessionScope.role == 'admin'}">
                                     <c:forEach items="${requestScope.speakers}" var="speaker">
@@ -86,7 +86,7 @@
                             <input type="hidden" name="conferenceId" value="${conferenceId}">
                             <input type="hidden" name="reportId" value="${reportId}">
                             <button type="submit" class="btn btn-success btn-block">
-                                <fmt:message key="html.report.save"/>
+                                <fmt:message key="html.add.report.form.save"/>
                             </button>
                         </div>
 

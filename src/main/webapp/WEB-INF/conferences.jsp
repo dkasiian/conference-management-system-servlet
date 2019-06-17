@@ -10,9 +10,9 @@
     <link href="<c:url value='/css/bootstrap-reboot.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/css/main.css' />" rel="stylesheet" type="text/css">
-    <title>Conferences</title>
     <fmt:setLocale value="${ empty sessionScope.lang ? 'en_US' : sessionScope.lang}" scope="session"/>
     <fmt:bundle basename="messages">
+    <title><fmt:message key="html.title.conferences"/></title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <h1 class="text-center">Here you can find all conferences:</h1>
+        <h2 class="text-center"><fmt:message key="html.text.conferences.heading" /></h2>
     </div>
 
     <div class="row justify-content-center">
@@ -32,7 +32,7 @@
                 <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                 <input type="hidden" name="isGetForm" value="true">
                 <button class="btn btn-info" type="submit">
-                    <fmt:message key="html.add.conference"/>
+                    <fmt:message key="html.text.conferences.add.conference"/>
                 </button>
             </form>
         </c:if>
@@ -40,18 +40,15 @@
         <table class="table table-bordered table-striped text-center">
             <thead class="thead-dark">
             <tr>
-                <th><fmt:message key="html.conference"/></th>
-                <th><fmt:message key="html.datetime"/></th>
-                <th><fmt:message key="html.location"/></th>
+                <th><fmt:message key="html.text.conferences.conference.name"/></th>
+                <th><fmt:message key="html.text.conferences.conference.datetime"/></th>
+                <th><fmt:message key="html.text.conferences.conference.location"/></th>
                 <c:if test="${sessionScope.role != 'guest'}">
-                    <th>Registration for attendance</th>
+                    <th><fmt:message key="html.text.conferences.conference.registration"/></th>
                 </c:if>
                 <c:if test="${sessionScope.role == 'admin'}">
-                    <th>Action</th>
+                    <th><fmt:message key="html.text.button.action"/></th>
                 </c:if>
-<%--                <c:if test="${sessionScope.role != 'guest'}">--%>
-<%--                    <th>Announcement</th>--%>
-<%--                </c:if>--%>
             </tr>
             </thead>
             <tbody>
@@ -79,7 +76,7 @@
                                     <input type="hidden" name="command" value="unregister">
                                     <button type="submit" <c:if test="${conference.dateTime < now}">disabled</c:if>
                                             class="btn btn-warning">
-                                        Unregister
+                                        <fmt:message key="html.text.conferences.unregister" />
                                     </button>
                                 </form>
                             </c:when>
@@ -93,7 +90,7 @@
                                     <input type="hidden" name="command" value="register">
                                     <button type="submit" class="btn btn-primary"
                                             <c:if test="${conference.dateTime < now}">disabled</c:if>>
-                                        Register
+                                        <fmt:message key="html.text.conferences.register" />
                                     </button>
                                 </form>
                             </c:otherwise>
@@ -105,21 +102,17 @@
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/update-conference?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage}"
                                   method="post">
                                 <input type="hidden" name="conferenceId" value="${conference.id}">
-<%--                                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">--%>
-<%--                                <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">--%>
                                 <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                                 <button class="btn btn-info" type="submit">
-                                    <fmt:message key="html.update"/>
+                                    <fmt:message key="html.text.button.update"/>
                                 </button>
                             </form>
                             <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}/delete-conference?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage}"
                                   method="post" class="mb-0">
                                 <input type="hidden" name="conferenceId" value="${conference.id}">
-<%--                                <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">--%>
-<%--                                <input type="hidden" name="records-per-page" value="${paginationAttributes.recordsPerPage}">--%>
                                 <input type="hidden" name="conferencesLink" value="${requestScope.conferencesLink}">
                                 <button class="btn btn-danger" type="submit">
-                                    <fmt:message key="html.delete"/>
+                                    <fmt:message key="html.text.button.delete"/>
                                 </button>
                             </form>
                         </td>
@@ -135,7 +128,7 @@
             <ul class="pagination">
                 <c:if test="${paginationAttributes.currentPage != 1}">
                     <li class="page-item">
-                        <a class="page-link" href="/${sessionScope.role}/${requestScope.conferencesLink}?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage-1}">Previous</a>
+                        <a class="page-link" href="/${sessionScope.role}/${requestScope.conferencesLink}?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage-1}"><fmt:message key="html.text.pagination.previous" /></a>
                     </li>
                 </c:if>
                 <c:forEach begin="1" end="${paginationAttributes.nOfPages}" var="i">
@@ -154,7 +147,7 @@
                 </c:forEach>
                 <c:if test="${paginationAttributes.currentPage lt paginationAttributes.nOfPages}">
                     <li class="page-item">
-                        <a class="page-link" href="/${sessionScope.role}/${requestScope.conferencesLink}?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage+1}">Next</a>
+                        <a class="page-link" href="/${sessionScope.role}/${requestScope.conferencesLink}?records-per-page=${paginationAttributes.recordsPerPage}&current-page=${paginationAttributes.currentPage+1}"><fmt:message key="html.text.pagination.next" /></a>
                     </li>
                 </c:if>
             </ul>
@@ -164,7 +157,7 @@
             <form action="${pageContext.request.contextPath}/${sessionScope.role}/${requestScope.conferencesLink}"
                   class="form-inline" onchange="submit()">
                 <input type="hidden" name="current-page" value="${paginationAttributes.currentPage}">
-                <label class="ml-2" for="records">Records per page:</label>
+                <label class="ml-2" for="records"><fmt:message key="html.text.pagination.records.per.page" /></label>
                 <select class="custom-select ml-1" id="records" name="records-per-page">
                     <option value="5" <c:if test="${paginationAttributes.recordsPerPage == 5}">selected</c:if>>5</option>
                     <option value="10" <c:if test="${paginationAttributes.recordsPerPage == 10}">selected</c:if>>10</option>
