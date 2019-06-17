@@ -3,7 +3,6 @@ package com.dkasiian.controller.commands;
 import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.controller.utils.SecurityConfigUtil;
 import com.dkasiian.model.entities.Conference;
-import com.dkasiian.model.entities.Role;
 import com.dkasiian.model.services.ConferenceService;
 import com.dkasiian.model.services.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -11,10 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +30,7 @@ public class ConferencesCommand extends Command {
         Map<String, Integer> paginationAttributes;
         if (request.getSession().getAttribute("isRedirect") != null){
             request.setAttribute("conferencesLink", request.getSession().getAttribute("conferencesLink"));
-            paginationAttributes = (Map<String, Integer>) request.getSession().getAttribute("paginationAttributes");
+            paginationAttributes = (HashMap<String, Integer>) request.getSession().getAttribute("paginationAttributes");
             conferences = conferenceService.getPaginatedConferences(
                     paginationAttributes.get("begin"), paginationAttributes.get("recordsPerPage"), locale.toString());
             request.getSession().removeAttribute("conferencesLink");
@@ -42,8 +38,8 @@ public class ConferencesCommand extends Command {
             request.getSession().removeAttribute("isRedirect");
         } else if (request.getSession().getAttribute("afterPastFutureConferences") != null){
             request.setAttribute("conferencesLink", request.getSession().getAttribute("conferencesLink"));
-            paginationAttributes = (Map<String, Integer>) request.getSession().getAttribute("paginationAttributes");
-            conferences = (List<Conference>) request.getSession().getAttribute("conferences");
+            paginationAttributes = (HashMap<String, Integer>) request.getSession().getAttribute("paginationAttributes");
+            conferences = (ArrayList<Conference>) request.getSession().getAttribute("conferences");
             request.getSession().removeAttribute("conferencesLink");
             request.getSession().removeAttribute("paginationAttributes");
             request.getSession().removeAttribute("afterPastFutureConferences");

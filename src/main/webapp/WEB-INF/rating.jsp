@@ -92,9 +92,7 @@
                                    <c:if test="${requestScope.speakerIdToRating[speaker.id] == 5}">checked</c:if>>
                         </form>
                     </td>
-                    <td class="align-middle">
-
-                    </td>
+                    <td class="align-middle">${requestScope.speakerIdToBonuses[speaker.id]}</td>
                 </tr>
             </c:forEach>
 

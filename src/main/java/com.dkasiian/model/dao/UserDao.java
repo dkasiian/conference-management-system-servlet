@@ -33,6 +33,8 @@ public interface UserDao extends GenericDao<User> {
 
     Map<Long, Integer> getSpeakersRating(List<Long> allSpeakersIds);
 
+    Map<Long, Integer> getSpeakersBonuses(List<Long> allSpeakersIds);
+
     Map<Long, Integer> getSpeakersRatingByUser(long userId);
 
     void setRating(long userId, long speakerId, int rating);

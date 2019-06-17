@@ -259,6 +259,22 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
+    public Map<Long, Integer> getSpeakersBonuses(List<Long> allSpeakersIds) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(sqlStatementsBundle.getString("users.speakers.rating.select.bonuses"))) {
+            Map<Long, Integer> speakersIdsToRating = new HashMap<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+                speakersIdsToRating.put(resultSet.getLong("speaker_id"), Math.round((float)resultSet.getDouble("avg")));
+            return speakersIdsToRating;
+        } catch (SQLException exc) {
+            LOG.error("JdbcUserDao :: getSpeakersBonuses :: " + exc);
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
     public void setRating(long userId, long speakerId, int rating) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection

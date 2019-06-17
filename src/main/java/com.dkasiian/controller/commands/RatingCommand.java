@@ -1,7 +1,6 @@
 package com.dkasiian.controller.commands;
 
 import com.dkasiian.controller.utils.PaginationUtil;
-import com.dkasiian.model.ResourceName;
 import com.dkasiian.model.entities.Report;
 import com.dkasiian.model.entities.User;
 import com.dkasiian.model.services.ReportService;
@@ -20,13 +19,12 @@ public class RatingCommand extends Command {
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
         String login = (String) request.getSession().getAttribute("login");
-        ResourceBundle messages = ResourceBundle.getBundle(ResourceName.MESSAGE_BUNDLE, locale);
 
         List<User> speakers;
         Map<String, Integer> paginationAttributes;
         if (request.getSession().getAttribute("speakers") != null){
-            speakers = (List<User>) request.getSession().getAttribute("speakers");
-            paginationAttributes = (Map<String, Integer>) request.getSession().getAttribute("paginationAttributes");
+            speakers = (ArrayList<User>) request.getSession().getAttribute("speakers");
+            paginationAttributes = (HashMap<String, Integer>) request.getSession().getAttribute("paginationAttributes");
             request.getSession().removeAttribute("speakers");
             request.getSession().removeAttribute("paginationAttributes");
         } else {
@@ -49,6 +47,7 @@ public class RatingCommand extends Command {
         Map<Long, List<Report>> speakerIdToReports = reportService.getSpeakersReports(allSpeakersIds, locale.toString());
 
         Map<Long, Integer> speakerIdToRating = userService.getSpeakersRating(allSpeakersIds);
+        Map<Long, Integer> speakerIdToBonuses = userService.getSpeakersBonuses(allSpeakersIds);
         Map<Long, Integer> speakerIdToUserRating = userService.getSpeakersRatingByUser(userId);
 
         request.setAttribute("speakers", speakers);
@@ -56,6 +55,7 @@ public class RatingCommand extends Command {
         request.setAttribute("speakersIdsForRating", speakersIdsForRating);
         request.setAttribute("speakerIdToReports", speakerIdToReports);
         request.setAttribute("speakerIdToRating", speakerIdToRating);
+        request.setAttribute("speakerIdToBonuses", speakerIdToBonuses);
         request.setAttribute("speakerIdToUserRating", speakerIdToUserRating);
 
         return URL_BUNDLE.getString("url.forward.rating");

@@ -72,6 +72,10 @@ public class UserService {
         return userDao.getSpeakersRating(allSpeakersIds);
     }
 
+    public Map<Long, Integer> getSpeakersBonuses(List<Long> allSpeakersIds) {
+        return userDao.getSpeakersBonuses(allSpeakersIds);
+    }
+
     public Map<Long, Integer> getSpeakersRatingByUser(long userId) {
         return userDao.getSpeakersRatingByUser(userId);
     }
