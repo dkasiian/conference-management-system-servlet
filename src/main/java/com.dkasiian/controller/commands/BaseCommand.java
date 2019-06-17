@@ -16,7 +16,7 @@ public class BaseCommand extends Command {
 
     private UserService userService = new UserService();
     private ConferenceService conferenceService = new ConferenceService();
-    private static final int DAYS_TO_ANNOUNCMENT = 3;
+    private static final int DAYS_TO_ANNOUNCEMENT_BY_DEFAULT = 3;
 
     @Override
     public String process(HttpServletRequest request) throws ServletException {
@@ -27,6 +27,12 @@ public class BaseCommand extends Command {
         if (login == null || login.isEmpty())
             return URL_BUNDLE.getString("url.redirect.index");
 
+        int daysToAnnouncement;
+        if (request.getParameter("daysToAnnouncement") == null)
+            daysToAnnouncement = DAYS_TO_ANNOUNCEMENT_BY_DEFAULT;
+        else
+            daysToAnnouncement = Integer.parseInt(request.getParameter("daysToAnnouncement"));
+
         long userId = userService.getUserId(login, locale.toString());
         List<Long> conferencesIds = userService.getConferencesIdsForWhichUserHasRegistration(userId);
 
@@ -34,7 +40,7 @@ public class BaseCommand extends Command {
         for (Long conferenceId : conferencesIds) {
             Conference conference = conferenceService.getConferenceById(conferenceId, locale.toString());
             if (conference.getDateTime().isAfter(LocalDateTime.now()) &&
-                    conference.getDateTime().isBefore(LocalDateTime.now().plusDays(DAYS_TO_ANNOUNCMENT)))
+                    conference.getDateTime().isBefore(LocalDateTime.now().plusDays(daysToAnnouncement)))
                 conferences.add(conference);
         }
 
@@ -52,6 +58,7 @@ public class BaseCommand extends Command {
 
         request.setAttribute("conferences", conferences);
         request.setAttribute("remainingTimes", remainingTimes);
+        request.setAttribute("daysToAnnouncement", daysToAnnouncement);
 
         return URL_BUNDLE.getString("url.redirect.index");
     }

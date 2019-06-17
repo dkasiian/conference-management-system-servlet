@@ -46,13 +46,7 @@ public class CommandFactory {
             return new UpdateReportCommand();
         } else if (type.equalsIgnoreCase("DELETE-REPORT")){
             return new DeleteReportCommand();
-        }
-//        else if (type.equalsIgnoreCase("REGISTER")){
-//            return new RegisterForConferenceCommand();
-//        } else if (type.equalsIgnoreCase("UNREGISTER")){
-//            return new UnregisterFromConferenceCommand();
-//        }
-        else if (type.equalsIgnoreCase("REGISTER-UNREGISTER")){
+        } else if (type.equalsIgnoreCase("REGISTER-UNREGISTER")){
             return new RegisterUnregisterConferenceCommand();
         } else if (type.equalsIgnoreCase("RATING")){
             return new RatingCommand();

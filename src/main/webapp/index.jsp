@@ -28,12 +28,40 @@
     </c:if>
 
     <c:if test="${sessionScope.role != 'guest'}">
+
+        <div class="row justify-content-center">
+            <form action="${pageContext.request.contextPath}/" class="form-inline" onchange="submit()">
+                <label class="ml-2 text-center" for="records">
+                    Choose how many days you will be notified about the upcoming conference:
+                </label>
+                <select class="custom-select ml-1" id="records" name="daysToAnnouncement">
+                    <c:choose>
+                        <c:when test="${daysToAnnouncement == null}">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="1" <c:if test="${daysToAnnouncement == 1}">selected</c:if>>1</option>
+                            <option value="2" <c:if test="${daysToAnnouncement == 2}">selected</c:if>>2</option>
+                            <option value="3" <c:if test="${daysToAnnouncement == 3}">selected</c:if>>3</option>
+                            <option value="4" <c:if test="${daysToAnnouncement == 4}">selected</c:if>>4</option>
+                            <option value="5" <c:if test="${daysToAnnouncement == 5}">selected</c:if>>5</option>
+                        </c:otherwise>
+                    </c:choose>
+                </select>
+            </form>
+        </div>
+
         <c:choose>
             <c:when test="${requestScope.conferences.isEmpty()}">
                 <h3 class="text-center">Here will be your Announcements, but know it seems your have no one :(</h3>
             </c:when>
             <c:otherwise>
                 <h3 class="text-center mb-2">Your Announcements:</h3>
+
                 <c:forEach items="${requestScope.conferences}" var="conference" varStatus="status">
                     <div class="card border-success mb-3 text-center">
                         <div class="card-header">
