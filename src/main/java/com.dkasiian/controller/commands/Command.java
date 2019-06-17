@@ -10,6 +10,6 @@ public abstract class Command {
 
     static final ResourceBundle URL_BUNDLE = ResourceBundle.getBundle(ResourceName.URL_BUNDLE);
 
-    public abstract String process(HttpServletRequest request) throws ServletException;
+    public abstract String process(HttpServletRequest request);
 
 }

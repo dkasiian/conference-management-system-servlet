@@ -2,7 +2,6 @@ package com.dkasiian.controller.commands;
 
 import com.dkasiian.model.services.ReportService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 public class DeleteReportCommand extends Command {
@@ -10,7 +9,7 @@ public class DeleteReportCommand extends Command {
     private ReportService reportService = new ReportService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request) {
 
         String conferenceId = request.getParameter("conferenceId");
         request.setAttribute("conferenceId", conferenceId);

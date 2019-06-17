@@ -4,7 +4,6 @@ import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.services.ConferenceService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Locale;
@@ -17,7 +16,7 @@ public class PastConferencesCommand extends Command {
     private ConferenceService conferenceService = new ConferenceService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
         Locale locale = (Locale) request.getSession().getAttribute("locale");
 
         Pattern pattern = Pattern.compile("(past-conferences|future-conferences|conferences(.*))");

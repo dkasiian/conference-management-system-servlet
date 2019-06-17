@@ -11,7 +11,6 @@ import com.dkasiian.model.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Locale;
@@ -25,7 +24,7 @@ public class AddReportCommand extends Command {
     private ReportService reportService = new ReportService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
         String role = (String) request.getSession().getAttribute("role");

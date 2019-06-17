@@ -4,7 +4,6 @@ import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.services.ConferenceService;
 import com.dkasiian.model.services.UserService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -19,7 +18,7 @@ public class BaseCommand extends Command {
     private static final int DAYS_TO_ANNOUNCEMENT_BY_DEFAULT = 3;
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
         String login = (String) request.getSession().getAttribute("login");

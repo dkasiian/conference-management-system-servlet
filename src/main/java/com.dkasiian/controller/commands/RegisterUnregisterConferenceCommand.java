@@ -1,15 +1,12 @@
 package com.dkasiian.controller.commands;
 
 import com.dkasiian.controller.utils.PaginationUtil;
-import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.services.ConferenceService;
 import com.dkasiian.model.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -22,7 +19,7 @@ public class RegisterUnregisterConferenceCommand extends Command {
     private UserService userService = new UserService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
         Locale locale = (Locale) request.getSession().getAttribute("locale");
         String login = (String) request.getSession().getAttribute("login");
 
@@ -35,8 +32,6 @@ public class RegisterUnregisterConferenceCommand extends Command {
         Map<String, Integer> paginationAttributes =
                 new PaginationUtil().getAttributes(request, conferenceCount);
         request.getSession().setAttribute("paginationAttributes", paginationAttributes);
-
-//        request.getSession().setAttribute("isRedirect", true);
 
         long conferenceId = Long.valueOf(request.getParameter("conferenceId"));
         long userId = userService.getUserId(login, locale.toString());

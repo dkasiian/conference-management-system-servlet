@@ -3,14 +3,11 @@ package com.dkasiian.controller.commands;
 import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.model.ResourceName;
 import com.dkasiian.model.dto.ConferenceDto;
-import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.services.ConferenceService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -23,7 +20,7 @@ public class UpdateConferenceCommand extends Command {
     private ConferenceService conferenceService = new ConferenceService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
         ResourceBundle messages = ResourceBundle.getBundle(ResourceName.MESSAGE_BUNDLE, locale);

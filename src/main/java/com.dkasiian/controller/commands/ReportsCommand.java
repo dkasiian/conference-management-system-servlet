@@ -9,7 +9,6 @@ import com.dkasiian.model.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +22,8 @@ public class ReportsCommand extends Command {
     private ReportService reportService = new ReportService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
 
-        // TODO: NEED REFACT
         long conferenceId = 0;
         if (request.getParameter("conferenceId") == null){
             String[] words = request.getRequestURI().split("/");

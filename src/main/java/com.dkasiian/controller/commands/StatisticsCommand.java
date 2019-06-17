@@ -6,11 +6,8 @@ import com.dkasiian.model.services.ConferenceService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StatisticsCommand extends Command {
 
@@ -18,7 +15,7 @@ public class StatisticsCommand extends Command {
     private ConferenceService conferenceService = new ConferenceService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
 

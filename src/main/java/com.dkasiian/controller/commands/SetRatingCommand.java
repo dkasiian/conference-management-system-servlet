@@ -4,7 +4,6 @@ import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.model.entities.User;
 import com.dkasiian.model.services.UserService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Locale;
@@ -15,7 +14,7 @@ public class SetRatingCommand extends Command {
     private UserService userService = new UserService();
 
     @Override
-    public String process(HttpServletRequest request) throws ServletException {
+    public String process(HttpServletRequest request){
 
         Locale locale = (Locale) request.getSession().getAttribute("locale");
         String login = (String) request.getSession().getAttribute("login");
