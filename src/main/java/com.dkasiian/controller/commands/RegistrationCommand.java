@@ -21,8 +21,6 @@ public class RegistrationCommand extends Command {
     @Override
     public String process(HttpServletRequest request) {
         Locale locale = (Locale) request.getSession().getAttribute("locale");
-//        if (locale == null)
-//            locale = new Locale("en_US");
         ResourceBundle regexBundle = ResourceBundle.getBundle(ResourceName.REGEXP_BUNDLE);
         ResourceBundle messageBundle = ResourceBundle.getBundle(ResourceName.MESSAGE_BUNDLE, locale);
 

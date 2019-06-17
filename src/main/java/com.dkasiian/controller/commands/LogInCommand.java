@@ -39,10 +39,6 @@ public class LogInCommand extends Command {
             request.setAttribute("incorrect_password", messageBundle.getString("html.validation.empty.password"));
             return URL_BUNDLE.getString("url.forward.login");
         }
-        if (!SecurityConfigUtil.isGuest(request)) {
-            LOG.warn("LogInCommand :: process :: User is already logged in");
-            return "redirect:/" + userService.getRoleByLogin(login, locale.toString());
-        }
         if (!userService.isUserExist(login)) {
             LOG.info("LogInCommand :: process :: User with such login: " + login + ", dose not exist");
             request.setAttribute("incorrect_login", messageBundle.getString("html.validation.no.registered.user.with.login"));
