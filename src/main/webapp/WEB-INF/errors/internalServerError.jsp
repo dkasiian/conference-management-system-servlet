@@ -18,7 +18,8 @@
 <jsp:include page="../fragments/header.jsp"/>
 <div class="container justify-content-center vertical-center">
     <div class="row justify-content-center">
-        <img src="<c:url value="/images/500.png"/>" width="800" alt="Internal Server Error"/>
+        <img src="<c:url value="/images/500.png"/>" width="1000" alt="Internal Server Error"/>
+        <br />
         <p class="lead text-center">
             <fmt:message key="html.internal.server.warning"/>
         </p>

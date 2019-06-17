@@ -18,7 +18,8 @@
 <jsp:include page="../fragments/header.jsp"/>
 <div class="container justify-content-center vertical-center">
     <div class="row justify-content-center">
-        <img src="<c:url value="/images/404.png"/>" width="800" alt="Not Found Error"/>
+        <img src="<c:url value="/images/404.png"/>" width="1000" alt="Not Found Error"/>
+        <br />
         <p class="lead text-center">
             <fmt:message key="html.not.found.warning"/>
         </p>

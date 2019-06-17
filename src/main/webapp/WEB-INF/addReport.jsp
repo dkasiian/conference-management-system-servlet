@@ -30,7 +30,7 @@
         <div class="col col-lg-4">
             <div class="card">
                 <article class="card-body">
-                    <h4 class="card-title">Please, fill in:</h4>
+                    <h4 class="card-title"><fmt:message key="html.text.form.heading" /></h4>
 
                     <form method="post" id="add-conference"
                           action="${pageContext.request.contextPath}/${sessionScope.role}/add-report">
