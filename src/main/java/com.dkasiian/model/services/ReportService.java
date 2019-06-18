@@ -1,7 +1,7 @@
 package com.dkasiian.model.services;
 
+import com.dkasiian.model.dao.DaoFactory;
 import com.dkasiian.model.dao.ReportDao;
-import com.dkasiian.model.dao.jdbc.JdbcDaoFactory;
 import com.dkasiian.model.dto.ReportDto;
 import com.dkasiian.model.entities.Report;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ReportService {
 
-    private ReportDao reportDao = new JdbcDaoFactory().createReportDao();
+    private ReportDao reportDao = DaoFactory.getInstance().createReportDao();
 
 
     public ReportDto getReportDtoById(Long reportId) { return reportDao.getReportDtoById(reportId); }

@@ -1,6 +1,5 @@
 package com.dkasiian.controller.commands;
 
-import com.dkasiian.controller.utils.SecurityConfigUtil;
 import com.dkasiian.model.ResourceName;
 import com.dkasiian.model.services.UserService;
 import org.apache.logging.log4j.LogManager;
