@@ -2,14 +2,17 @@ package com.dkasiian.controller.commands;
 
 import com.dkasiian.controller.utils.PaginationUtil;
 import com.dkasiian.controller.utils.SecurityConfigUtil;
+import com.dkasiian.model.entities.Conference;
 import com.dkasiian.model.entities.Report;
 import com.dkasiian.model.entities.User;
+import com.dkasiian.model.services.ConferenceService;
 import com.dkasiian.model.services.ReportService;
 import com.dkasiian.model.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +21,7 @@ import java.util.Map;
 public class ReportsCommand extends Command {
 
     private static final Logger LOG = LogManager.getLogger(ConferencesCommand.class);
+    private ConferenceService conferenceService = new ConferenceService();
     private UserService userService = new UserService();
     private ReportService reportService = new ReportService();
 
@@ -60,6 +64,10 @@ public class ReportsCommand extends Command {
         }
 
         request.setAttribute("conferenceId", conferenceId);
+
+        Conference conference = conferenceService.getConferenceById(conferenceId, locale.toString());
+        if (conference.getDateTime().isBefore(LocalDateTime.now()))
+            request.setAttribute("isAddReportButtonDisable", true);
 
         return URL_BUNDLE.getString("url.forward.reports");
     }

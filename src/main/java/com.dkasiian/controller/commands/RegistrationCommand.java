@@ -48,6 +48,8 @@ public class RegistrationCommand extends Command {
 
         LOG.info("New user registered");
 
+        request.getSession().setAttribute("isSuccessRegistration", true);
+
         return "redirect:" + URL_BUNDLE.getString("url.redirect.guest.login");
     }
 }

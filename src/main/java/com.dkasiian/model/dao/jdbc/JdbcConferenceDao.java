@@ -137,7 +137,7 @@ public class JdbcConferenceDao implements ConferenceDao {
             preparedStatement.setTimestamp(3, Timestamp.valueOf(conference.getDateTime()));
             preparedStatement.setString(4, conference.getLocationEn());
             preparedStatement.setString(5, conference.getLocationUa());
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             return true;
         } catch (SQLException exc) {
             LOG.error("JdbcConferenceDao :: add :: " + exc);

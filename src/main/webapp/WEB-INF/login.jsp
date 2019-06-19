@@ -43,6 +43,15 @@
             </div>
         </div>
     </div>
+
+    <c:if test="${isSuccessRegistration != null}">
+    <div class="row justify-content-center">
+        <p class="text-center text-success">
+            <fmt:message key="html.text.login.success.registration" />
+        </p>
+    </div>
+    </c:if>
+
 </div>
 </fmt:bundle>
 </body>

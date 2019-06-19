@@ -26,6 +26,10 @@ public class LogInCommand extends Command {
 
         if (login == null || password == null) {
             LOG.trace("LogInCommand :: process :: Login or password is null");
+            if (request.getSession().getAttribute("isSuccessRegistration") != null) {
+                request.setAttribute("isSuccessRegistration", true);
+                request.removeAttribute("isSuccessRegistration");
+            }
             return URL_BUNDLE.getString("url.forward.login");
         }
         if (login.isEmpty()) {

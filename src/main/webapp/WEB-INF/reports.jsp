@@ -24,7 +24,7 @@
     </div>
     <div class="row justify-content-center">
 
-        <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'speaker'}">
+        <c:if test="${(sessionScope.role == 'admin' || sessionScope.role == 'speaker') && isAddReportButtonDisable == null}">
             <form action="${pageContext.request.contextPath}/${sessionScope.role}/add-report" method="post">
                 <input type="hidden" name="conferenceId" value="${conferenceId}">
                 <button class="btn btn-info" type="submit">

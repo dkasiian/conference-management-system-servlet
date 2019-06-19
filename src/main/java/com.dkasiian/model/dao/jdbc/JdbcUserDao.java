@@ -84,7 +84,7 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setString(6, user.getSurnameUa());
             preparedStatement.setString(7, user.getEmail());
             preparedStatement.setString(8, user.getRole().name());
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
             return true;
         } catch (SQLException exc) {
             LOG.error("JdbcUserDao :: add :: " + exc);
@@ -162,7 +162,7 @@ public class JdbcUserDao implements UserDao {
                      connection.prepareStatement(sqlStatementsBundle.getString("users.conferences.register.user.for.conference"))) {
             preparedStatement.setLong(1, userId);
             preparedStatement.setLong(2, conferenceId);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException exc) {
             LOG.error("JdbcUserDao :: registerForConference :: " + exc);
             throw new RuntimeException();
@@ -176,7 +176,7 @@ public class JdbcUserDao implements UserDao {
                      sqlStatementsBundle.getString("users.conferences.unregister.user.from.conference"))) {
             preparedStatement.setLong(1, userId);
             preparedStatement.setLong(2, conferenceId);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException exc) {
             LOG.error("JdbcUserDao :: unregisterFromConference :: " + exc);
             throw new RuntimeException();
@@ -283,7 +283,7 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setLong(2, speakerId);
             preparedStatement.setInt(3, rating);
             preparedStatement.setInt(4, rating * 100);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException exc) {
             LOG.error("JdbcUserDao :: setRating :: " + exc);
             throw new RuntimeException();
@@ -297,7 +297,7 @@ public class JdbcUserDao implements UserDao {
                      .prepareStatement(sqlStatementsBundle.getString("users.speakers.rating.delete"))) {
             preparedStatement.setLong(1, userId);
             preparedStatement.setLong(2, speakerId);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException exc) {
             LOG.error("JdbcUserDao :: deleteRating :: " + exc);
             throw new RuntimeException();
@@ -328,7 +328,7 @@ public class JdbcUserDao implements UserDao {
             preparedStatement.setInt(2, rating * 100);
             preparedStatement.setLong(3, userId);
             preparedStatement.setLong(4, speakerId);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException exc) {
             LOG.error("JdbcUserDao :: updateRating :: " + exc);
             throw new RuntimeException();
