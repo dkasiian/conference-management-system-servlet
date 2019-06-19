@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class BaseCommand extends Command {
+public class BaseCommand implements Command {
 
     private UserService userService = new UserService();
     private ConferenceService conferenceService = new ConferenceService();

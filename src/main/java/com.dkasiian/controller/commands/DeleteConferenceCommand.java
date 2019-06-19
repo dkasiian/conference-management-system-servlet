@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DeleteConferenceCommand extends Command {
+public class DeleteConferenceCommand implements Command {
 
     private ConferenceService conferenceService = new ConferenceService();
 

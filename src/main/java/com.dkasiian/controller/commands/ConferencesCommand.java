@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ConferencesCommand extends Command {
+public class ConferencesCommand implements Command {
 
     private static final Logger LOG = LogManager.getLogger(ConferencesCommand.class);
     private UserService userService = new UserService();

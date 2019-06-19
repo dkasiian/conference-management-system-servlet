@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-public class StatisticsCommand extends Command {
+public class StatisticsCommand implements Command {
 
     private static final Logger LOG = LogManager.getLogger(AddConferenceCommand.class);
     private ConferenceService conferenceService = new ConferenceService();

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class UpdateReportCommand extends Command {
+public class UpdateReportCommand implements Command {
 
     private final static Logger LOG = LogManager.getLogger(RegistrationCommand.class);
     private ReportService reportService = new ReportService();

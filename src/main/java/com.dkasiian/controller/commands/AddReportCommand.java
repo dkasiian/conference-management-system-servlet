@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class AddReportCommand extends Command {
+public class AddReportCommand implements Command {
 
     private static final Logger LOG = LogManager.getLogger(AddReportCommand.class);
     private UserService userService = new UserService();

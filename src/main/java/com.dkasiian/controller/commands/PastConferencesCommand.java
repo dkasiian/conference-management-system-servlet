@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PastConferencesCommand extends Command {
+public class PastConferencesCommand implements Command {
 
     private ConferenceService conferenceService = new ConferenceService();
 

@@ -9,7 +9,7 @@ import com.dkasiian.model.services.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-public class RatingCommand extends Command {
+public class RatingCommand implements Command {
 
     private UserService userService = new UserService();
     private ReportService reportService = new ReportService();

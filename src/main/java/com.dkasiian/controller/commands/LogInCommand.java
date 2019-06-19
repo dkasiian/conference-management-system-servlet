@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LogInCommand extends Command {
+public class LogInCommand implements Command {
 
     private final static Logger LOG = LogManager.getLogger(LogInCommand.class);
     private UserService userService = new UserService();

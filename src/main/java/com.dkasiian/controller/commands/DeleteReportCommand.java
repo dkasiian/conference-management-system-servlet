@@ -4,7 +4,7 @@ import com.dkasiian.model.services.ReportService;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class DeleteReportCommand extends Command {
+public class DeleteReportCommand implements Command {
 
     private ReportService reportService = new ReportService();
 

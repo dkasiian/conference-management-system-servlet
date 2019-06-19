@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class RegistrationCommand extends Command {
+public class RegistrationCommand implements Command {
 
     private final static Logger LOG = LogManager.getLogger(RegistrationCommand.class);
     private UserService userService = new UserService();

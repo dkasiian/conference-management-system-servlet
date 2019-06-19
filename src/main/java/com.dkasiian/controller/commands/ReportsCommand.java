@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class ReportsCommand extends Command {
+public class ReportsCommand implements Command {
 
     private static final Logger LOG = LogManager.getLogger(ConferencesCommand.class);
     private ConferenceService conferenceService = new ConferenceService();

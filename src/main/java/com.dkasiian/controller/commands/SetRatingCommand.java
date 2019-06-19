@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class SetRatingCommand extends Command {
+public class SetRatingCommand implements Command {
 
     private UserService userService = new UserService();
 

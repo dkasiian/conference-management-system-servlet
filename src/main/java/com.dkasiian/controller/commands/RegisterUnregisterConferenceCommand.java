@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegisterUnregisterConferenceCommand extends Command {
+public class RegisterUnregisterConferenceCommand implements Command {
 
     private final static Logger LOG = LogManager.getLogger(RegistrationCommand.class);
     private ConferenceService conferenceService = new ConferenceService();
